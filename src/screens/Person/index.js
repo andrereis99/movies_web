@@ -75,6 +75,12 @@ export class Person extends Component {
                                 <div className="People">
                                     {person.cast.map((elem, i) =>
                                         <div className="PersonCard" onClick={() => dispatch(push(`/movie/${elem.id}`))}>
+                                            {elem?.poster_path || elem?.backdrop_path ?
+                                                <img
+                                                    src={`https://image.tmdb.org/t/p/original${elem?.poster_path || elem?.backdrop_path}`} />:
+                                                    <div className="DetailScreenVideoCard">
+                                                        <span>{Strings.errors.whitoutImage}</span>
+                                                    </div>}
                                             <span>{elem.Title || elem.title || elem.original_title || elem.name || elem.original_name}</span>
                                             <span style={{ fontWeight: 'bold' }}>
                                                 {`${Strings.people.character}: `}
@@ -94,10 +100,12 @@ export class Person extends Component {
                                 <div className="People">
                                     {person.crew.map((elem, i) =>
                                         <div className="PersonCard" onClick={() => dispatch(push(`/movie/${elem.id}`))}>
-                                            {elem?.profile_path ?
+                                            {elem?.poster_path || elem?.backdrop_path ?
                                                 <img
-                                                    src={`https://image.tmdb.org/t/p/original/${elem?.profile_path}`} /> :
-                                                    <div></div>}
+                                                    src={`https://image.tmdb.org/t/p/original${elem?.poster_path || elem?.backdrop_path}`} />:
+                                                    <div className="DetailScreenVideoCard">
+                                                        <span>{Strings.errors.whitoutImage}</span>
+                                                    </div>}
                                             <span>{elem.Title || elem.title || elem.original_title || elem.name || elem.original_name}</span>
                                             <span style={{ fontWeight: 'bold' }}>
                                                 {`${Strings.people.department}: `}

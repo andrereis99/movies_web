@@ -85,6 +85,12 @@ export class Movie extends Component {
                                 <div className="People">
                                     {movie.cast.map((elem, i) =>
                                         <div className="PersonCard" onClick={() => dispatch(push(`/person/${elem.id}`))}>
+                                            {elem?.profile_path ?
+                                                <img
+                                                    src={`https://image.tmdb.org/t/p/original${elem?.profile_path}`} />:
+                                                    <div className="DetailScreenVideoCard">
+                                                        <span>{Strings.errors.whitoutImage}</span>
+                                                    </div>}
                                             <span>{elem.name}</span>
                                             <span style={{ fontWeight: 'bold' }}>
                                                 {`${Strings.people.character}: `}
@@ -104,6 +110,12 @@ export class Movie extends Component {
                                 <div className="People">
                                     {movie.crew.map((elem, i) =>
                                         <div className="PersonCard" onClick={() => dispatch(push(`/person/${elem.id}`))}>
+                                        {elem?.profile_path ?
+                                            <img
+                                                src={`https://image.tmdb.org/t/p/original${elem?.profile_path}`} />:
+                                                <div className="DetailScreenVideoCard">
+                                                    <span>{Strings.errors.whitoutImage}</span>
+                                                </div>}
                                             <span>{elem.name}</span>
                                             <span style={{ fontWeight: 'bold' }}>
                                                 {`${Strings.people.department}: `}
