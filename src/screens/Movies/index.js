@@ -24,17 +24,22 @@ export class Movies extends Component {
 		const { param } = this.state;
 		const { match } = this.props;
 
-		console.log('here1')
-		this.setState({ param: match.params.sorter }, this.getMovies);
+		this.setState({ param: match.params.sorter }, () => {
+			if (match.params.sorter === 'search') this.searchMovies();
+			else this.getMovies();
+		});
 	}
 
 	componentDidUpdate() {
 		const { param } = this.state;
 		const { match } = this.props;
 		
-		if (param !== match.params.sorter) {
-			console.log('here2')
-			this.setState({ param: match.params.sorter }, this.getMovies);
+		if (match.params.sorter === 'search') {
+			this.searchMovies();
+		} else if (param !== match.params.sorter) {
+			this.setState({ param: match.params.sorter }, () => {
+				this.getMovies();
+			});
 		}
 	}
     
@@ -55,6 +60,29 @@ export class Movies extends Component {
 		} catch (err) {
 			toast.error(Strings.errors.somethingWentWrong);
 		}
+	}
+
+	searchMovies = async () => {
+		const { language, search } = this.props;
+		const { page } = this.state;
+
+		if (search === this.state.search) return;
+
+		this.setState({ search }, async () => {
+			try {
+				const response = await API.get({
+					url: Endpoints.uriMovies(`search/${search}/${page || 1}/${language}`),
+				});
+	
+				if (response.status >= 200 && response.status < 400) {
+					const movies = response.data.results.results
+					console.log('results', movies)
+					this.setState({ movies });
+				}
+			} catch (err) {
+				toast.error(Strings.errors.somethingWentWrong);
+			}
+		})
 	}
 	
 	getTitle = () => {
@@ -144,6 +172,8 @@ export class Movies extends Component {
     }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+	search: state?.router?.location?.state?.search,
+});
 
 export default connect(mapStateToProps)(Movies);

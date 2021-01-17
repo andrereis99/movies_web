@@ -51,7 +51,7 @@ export class Movie extends Component {
                 <div className="page">
                     <div className="MovieHeader">
                         <img
-                            src={`https://image.tmdb.org/t/p/original/${movie?.poster_path || movie?.backdrop_path}`}
+                            src={movie?.poster_path ? `https://image.tmdb.org/t/p/original/${movie?.poster_path || movie?.backdrop_path}` : movie?.Poster}
                             alt={title}/>
                         <div className="MovieInfo">
                             <h2>{title}</h2>

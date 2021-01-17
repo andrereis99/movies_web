@@ -82,7 +82,9 @@ export class Navbar extends React.PureComponent {
                         <Button
                             className='SearchButton'
                             onClick={() => {
-                                dispatch(push(`/search/${this.state.search}`))
+                                console.log('this.state.search',this.state.search)
+                                dispatch(push(`/`));
+                                dispatch(push(`/movies/search`, { search: this.state.search}));
                             }}>
                             <span>
                                 {Strings.generic.search}
