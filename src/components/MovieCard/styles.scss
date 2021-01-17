@@ -1,0 +1,75 @@
+@import '../../styles/variables';
+
+.MovieCard {
+    margin: 15px;
+    width: 250px;
+    background-color: $selectedItemColor;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px $primaryColor;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+        scale: 1.02;
+        .MovieCard_overview {
+            transform: translateY(30%);
+        }
+    }
+
+    img {
+        max-width: 100%;
+    }
+}
+
+.MovieCard_info {
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    justify-content: space-between;
+
+    h3 {
+        margin: 0;
+        color: $textColor;
+    }
+    span {
+        font-weight: bold;
+
+        &.good {
+            color: green;
+        }
+        &.average {
+            color: orangered;
+        }
+        &.bad {
+            color: red;
+        }
+    }
+    .separator::before {
+        content: "";
+        background-color: darken($selectedItemColor, 10%);
+        position: absolute;
+        width: 1px;
+        height: 100px;
+        top: 375px;
+        left: 214px;
+        display: block;
+    }
+}
+
+.MovieCard_overview {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 3px 3px 5px $secondaryColor;
+    background-color: $selectedItemColor;
+    padding: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-overflow: ellipsis;
+    overflow: auto;
+    min-height: 100%;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+}
