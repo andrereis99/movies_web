@@ -1,0 +1,95 @@
+@import '../../styles/variables';
+
+.NavbarWrapper {
+    background-color: $secondaryColor;
+}
+
+.NavbarContainer {
+    width: 100%;
+    font-family: Poppins;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: $m;
+    display: flex;
+    flex-direction: row;
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+    }
+
+    .NavbarHome {
+        margin: 5px;
+
+        .NavbarLogoContainer {
+            display: flex;
+            align-items: center;
+            margin-left: 5px;
+            height: 60px;
+            width: 60px;
+            padding-left: 10px;
+
+            .Logo {
+                height: 50px;
+                width: auto;
+                object-fit: contain;
+            }
+        }
+    }
+
+    .NavbarContent {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        padding: 18px;
+
+        @media screen and (max-width: 768px) {
+            position: absolute;
+            margin: 10px;
+            min-width: 400px;
+        }
+
+        .NavbarLink {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 0 10px;
+            margin: 0 10px;
+            text-align: center;
+            text-decoration: none;
+            color: $textColor;
+            font-weight: bold;
+            border-radius: 5px;
+
+            &.__active {
+                background-color: $selectedItemColor;
+            }
+
+            &:hover {
+                background-color: darken($secondaryColor, 3%);
+            }
+        }
+    }
+
+    .NavbarSearch {
+        margin: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+
+        .Search {
+            height: 22px;
+            border-radius: 5px;
+            border: 1px solid $textColor;
+        }
+
+        .SearchButton {
+            height: 25px;
+            margin: 0 5px 0 1px;
+            border-radius: 5px;
+            border: 1px solid $textColor;
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,79 @@
+@import '../../styles/variables';
+
+.MovieHeader {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50%;
+    justify-content: space-between;
+
+    @media screen and (min-width: 768px) {
+        flex-direction: row-reverse;
+    }
+
+    img {
+        display: flex;
+        flex-direction: row;
+        width: 300px;
+        margin-top: 0;
+
+        @media screen and (max-width: 768px) {
+            margin: auto;
+        }
+    }
+
+    .MovieInfo {
+        margin: 20px;
+    }
+}
+
+.row {
+    display: flex;
+    
+    p {
+        margin: auto;
+        margin-left: 10px;
+    }
+}
+
+.Slider_People{
+    position: relative;
+    overflow: hidden;
+    
+    .btn{
+        width: 40px;
+        height: 100%;
+        background: rgba(0,0,0,0.3);
+        position: absolute;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .People {
+        margin: 15px 10px;
+        display: flex;
+        overflow-x: auto;
+        
+        .PersonCard {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 15px;
+            min-width: 150px;
+            background-color: $selectedItemColor;
+            border-radius: 5px;
+            box-shadow: 3px 3px 5px $primaryColor;
+            position: relative;
+            cursor: pointer;
+    
+            &:hover {
+                scale: 1.02;
+            }
+    
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+    
+}
