@@ -1,0 +1,13 @@
+@import '../../styles/variables';
+
+.DetailScreenVideoCard {
+    height: 227px;
+    display: flex;
+    justify-content: center;
+
+    span {
+        display: flex;
+        align-items: center;
+        color: $primaryColor;
+    }
+}

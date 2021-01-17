@@ -30,6 +30,7 @@ export default new LocalizedStrings({
         errors: {
             somethingWentWrong: 'Algo correu mal',
             noResultsWereFound: 'Não foram encontrados resultados',
+            whitoutImage: 'Sem Image',
         }
     },
     en: {
@@ -61,6 +62,7 @@ export default new LocalizedStrings({
         errors: {
             somethingWentWrong: 'Something went wrong',
             noResultsWereFound: 'No Results Were Found',
+            whitoutImage: 'Whitout Image',
         }
     },
     es: {
@@ -92,6 +94,7 @@ export default new LocalizedStrings({
         errors: {
             somethingWentWrong: 'Algo salió mal',
             noResultsWereFound: 'No se encontraron resultados',
+            whitoutImage: 'Sin Imagen',
         }
     },
 });

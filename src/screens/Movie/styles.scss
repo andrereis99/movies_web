@@ -59,7 +59,8 @@
             flex-direction: column;
             justify-content: space-between;
             margin: 15px;
-            min-width: 150px;
+            min-width: 170px;
+            max-width: 170px;
             background-color: $selectedItemColor;
             border-radius: 5px;
             box-shadow: 3px 3px 5px $primaryColor;
