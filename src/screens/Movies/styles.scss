@@ -29,3 +29,22 @@
         background-color: darken($secondaryColor, 3%);
     }
 }
+
+.Pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin: 10px 20px 30px 20px;
+
+    .PageNumber {
+        margin: 2px;
+        padding: 8px 15px;
+        border: 1px solid $primaryColor;
+        border-radius: 10px;
+        cursor: pointer;
+
+        &.__active {
+            background-color: $primaryColor;
+        }
+    }
+}

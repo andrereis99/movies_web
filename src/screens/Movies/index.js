@@ -14,7 +14,9 @@ export class Movies extends Component {
 
 		this.state = {
 			movies: [],
-			param: null
+			param: null,
+			page: 1,
+			totalPages: 1,
 		};
 	}
 
@@ -47,35 +49,41 @@ export class Movies extends Component {
 
         try {
 			const response = await API.get({
-				url: Endpoints.uriMovies(`sorted/${match.params.sorter}/${page || 1}/${language}`),
+				url: Endpoints.uriMovies(`sorted/${match.params.sorter}/${page || 1}/${language || ''}`),
 			});
 
 			if (response.status >= 200 && response.status < 400) {
-				const movies = response.data.results.results
-				console.log('results', movies)
-				this.setState({ movies });
+				const results = response.data.results
+				this.setState({
+					movies: results.results,
+					page: results.page,
+					totalPages: results.total_pages,
+				});
 			}
 		} catch (err) {
 			toast.error(Strings.errors.somethingWentWrong);
 		}
 	}
 
-	searchMovies = async () => {
+	searchMovies = async pageChanged => {
 		const { language, search } = this.props;
 		const { page } = this.state;
 
-		if (search === this.state.search) return;
+		if (search === this.state.search && !pageChanged) return;
 
-		this.setState({ search }, async () => {
+		this.setState({ search, page: 1 }, async () => {
 			try {
 				const response = await API.get({
-					url: Endpoints.uriMovies(`search/${search}/${page || 1}/${language}`),
+					url: Endpoints.uriMovies(`search/${search}/${page}/${language || ''}`),
 				});
 	
 				if (response.status >= 200 && response.status < 400) {
-					const movies = response.data.results.results
-					console.log('results', movies)
-					this.setState({ movies });
+					const results = response.data.results
+					this.setState({
+						movies: results.results,
+						page: results.page,
+						totalPages: results.total_pages,
+					});
 				}
 			} catch (err) {
 				toast.error(Strings.errors.somethingWentWrong);
@@ -92,11 +100,79 @@ export class Movies extends Component {
 		else return Strings.movies.header;
 	}
 
+	changePage = (page) => {
+		const { totalPages } = this.state;
+		const { match } = this.props;
+
+		if (page > totalPages || page < 1 || page === this.state.page) return;
+
+		this.setState({ page }, () => {
+			if (match.params.sorter === 'search') {
+				this.searchMovies(true);
+			} else {
+				this.getMovies();
+			}
+		})
+	}
+
+	renderPagination() {
+		const { page, totalPages } = this.state;
+
+		let pages = [];
+		if (totalPages < 9) {
+			for (let i = 1; i < totalPages; i++) {
+				pages.push(<div
+					className={`PageNumber ${page === i ? '__active' : ''}`}
+					onClick={() => this.changePage(i)}>
+					{i}
+				</div>);
+			}
+		} else {
+			const start = page > 5 ? page - 4 : 1;
+			const range = totalPages - page > 5 ? page + 3 : totalPages+1;
+			for (let i = start; i < range; i++) {
+				pages.push(<div
+					className={`PageNumber ${page === i ? '__active' : ''}`}
+					onClick={() => this.changePage(i)}>
+					{i}
+				</div>);
+			}
+		}
+
+		return (
+			<div className="Pagination" key={`${page}_${totalPages}`}>
+				<div
+					className="PageNumber"
+					onClick={() => this.changePage(1)}>
+					&#8810;
+				</div>
+				<div
+					className="PageNumber"
+					onClick={() => this.changePage(this.state.page-1)}>
+					&#x3c;
+				</div>
+				{page > 5 && <div className="PageNumber">...</div>}
+				{pages}
+				{page < totalPages - 5 && <div className="PageNumber">...</div>}
+				<div
+					className="PageNumber"
+					onClick={() => this.changePage(this.state.page+1)}>
+					&#x3e;
+				</div>
+				<div
+					className="PageNumber"
+					onClick={() => this.changePage(totalPages)}>
+					&#x226B;
+				</div>
+			</div>
+		)
+	}
+
     render () {
         const { dispatch } = this.props;
         const { movies } = this.state;
 
-        const title = this.getTitle();
+		const title = this.getTitle();
 
         return (
             <React.Fragment>
@@ -126,6 +202,7 @@ export class Movies extends Component {
 									/>
 								))}
 						</div>
+						{this.renderPagination()}
 					</div> :
 					<div>
 						{Strings.errors.noResultsWereFound}
