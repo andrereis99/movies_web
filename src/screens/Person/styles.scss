@@ -11,3 +11,13 @@
         color: $primaryColor;
     }
 }
+
+.sliderContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.SliderHeader {
+    display: flex;
+    justify-content: space-between;
+}

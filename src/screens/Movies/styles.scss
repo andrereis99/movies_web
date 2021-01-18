@@ -10,22 +10,22 @@
     display: flex;
     justify-content: space-between;
     margin: 10px 70px;
+}
 
-    .DownloadButton {
-        margin: auto 10px;
-        width: 150px;
-        height: 40px;
-        border-radius: 15px;
-        border: 1px solid $primaryColor;
-        background-color: $secondaryColor;
-        cursor: pointer;
-        font-family: Poppins;
-        text-transform: uppercase;
-        font-size: $m;
-        color: $textColor;
-        
-        &:hover {
-            background-color: darken($secondaryColor, 3%);
-        }
+.DownloadButton {
+    margin: auto 10px;
+    width: 150px;
+    height: 40px;
+    border-radius: 15px;
+    border: 1px solid $primaryColor;
+    background-color: $secondaryColor;
+    cursor: pointer;
+    font-family: Poppins;
+    text-transform: uppercase;
+    font-size: $m;
+    color: $textColor;
+    
+    &:hover {
+        background-color: darken($secondaryColor, 3%);
     }
 }
