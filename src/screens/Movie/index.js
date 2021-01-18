@@ -76,6 +76,16 @@ export class Movie extends Component {
                                 </div> :
                                 <div></div>
                             }
+                            {movie.release_date || movie.Released ?
+                                <div className="row">
+                                    <h4>{`${Strings.movies.release_date}: `}</h4>
+                                    <p>{movie.release_date || movie.Released}</p>
+                                </div> : <div></div>}
+                            {movie.Runtime || movie.runtime ?
+                                <div className="row">
+                                    <h4>{`${Strings.movies.runtime}: `}</h4>
+                                    <p>{movie.Runtime || movie.runtime}</p>
+                                </div> : <div></div>}
                         </div>
                     </div>
                     {movie.cast && movie.cast.length ?
@@ -101,8 +111,7 @@ export class Movie extends Component {
                                 </div>
                             </div>
                         </div> :
-                        <div></div>
-                    }
+                        <div></div>}
                     {movie.crew && movie.crew.length ?
                         <div styles={{ margin: 0 }}>
                             <h4>{`${Strings.people.crew}: `}</h4>
@@ -126,8 +135,7 @@ export class Movie extends Component {
                                 </div>
                             </div>
                         </div> :
-                        <div></div>
-                    }
+                        <div></div>}
                 </div>
             </React.Fragment>
         )

@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import { Button } from 'antd';
 import Strings from '../../utils/strings';
-import { toast } from "../../utils/utils";
+import { toast, downloadPPT } from "../../utils/utils";
 import { push } from 'connected-react-router';
 import { API, Endpoints } from '../../utils/api';
+
 import './styles.scss';
+// import '../Movies/styles.scss'
 
 export class Person extends Component {
     constructor(props) {
@@ -69,8 +72,17 @@ export class Person extends Component {
                         </div>
                     </div>
                     {person.cast && person.cast.length ?
-                        <div styles={{ margin: 0 }}>
-                            <h4>{`${Strings.people.cast}: `}</h4>
+                        <div className="sliderContainer">
+                        <div className="SliderHeader">
+                            <h3>{`${Strings.people.cast}: `}</h3>
+                            <Button
+                                className='DownloadButton'
+                                onClick={() => {
+                                    downloadPPT(person.cast, `${person.name}_cast`)
+                                }}>
+                                <span>{`${Strings.generic.download} ${Strings.people.cast}`}</span>
+                            </Button>
+                        </div>
                             <div className="Slider_People">
                                 <div className="People">
                                     {person.cast.map((elem, i) =>
@@ -94,8 +106,17 @@ export class Person extends Component {
                         <div></div>
                     }
                     {person.crew && person.crew.length ?
-                        <div styles={{ margin: 0 }}>
-                            <h4>{`${Strings.people.crew}: `}</h4>
+                        <div className="sliderContainer">
+                            <div className="SliderHeader">
+                                <h3>{`${Strings.people.crew}: `}</h3>
+                                <Button
+                                    className='DownloadButton'
+                                    onClick={() => {
+                                        downloadPPT(person.crew, `${person.name}_crew`)
+                                    }}>
+                                    <span>{`${Strings.generic.download} ${Strings.people.crew}`}</span>
+                                </Button>
+                            </div>
                             <div className="Slider_People">
                                 <div className="People">
                                     {person.crew.map((elem, i) =>

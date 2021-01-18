@@ -17,7 +17,9 @@ export default new LocalizedStrings({
             upcoming: 'Brevemente',
             overview: 'Visão Geral',
             genres: 'Géneros',
-            companies: 'Empresas'
+            companies: 'Empresas',
+            release_date: 'Data de Lançamento',
+            runtime: 'Tempo de Execução',
         },
         people: {
             header: 'Pessoas',
@@ -49,7 +51,9 @@ export default new LocalizedStrings({
             upcoming: 'Upcoming',
             overview: 'Overview',
             genres: 'Genres',
-            companies: 'Companies'
+            companies: 'Companies',
+            release_date: 'Release Date',
+            runtime: 'Runtime',
         },
         people: {
             header: 'People',
@@ -81,7 +85,9 @@ export default new LocalizedStrings({
             upcoming: 'Brevemente',
             overview: 'Visión General',
             genres: 'Géneros',
-            companies: 'Compañías'
+            companies: 'Compañías',
+            release_date: 'Fecha de lanzamiento',
+            runtime: 'Tiempo de Ejecución',
         },
         people: {
             header: 'Personas',
